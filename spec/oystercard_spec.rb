@@ -23,6 +23,15 @@ describe Oystercard do
     end
   end
 
+  describe "#touch_out" do
+
+    it "will dedect money on touch_out" do
+      subject.top_up(10)
+      subject.touch_in
+      expect { subject.touch_out }.to change { subject.balance }.by(-Oystercard::MINIMUM_CHARGE)
+    end
+  end
+
   describe "#top_up" do
     before do
       subject.top_up(Oystercard::MAXIMUM_BALANCE)
